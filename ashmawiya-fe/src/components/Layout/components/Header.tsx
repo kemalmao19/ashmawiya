@@ -1,4 +1,4 @@
-export const Header = ({ children }) => {
+export const Header = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="w-full">
       <div className="navbar bg-base-100 p-4">

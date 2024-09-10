@@ -7,4 +7,9 @@ type State = {
   panel: Panel;
 };
 
+type ContextType = {
+  state: State;
+  dispatch: React.Dispatch<Action>;
+};
+
 type Action = Panel;

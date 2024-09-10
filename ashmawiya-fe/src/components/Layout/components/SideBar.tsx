@@ -1,6 +1,6 @@
 import { Links } from "./Links/Links";
 import { NotebookText, LogOut } from "lucide-react";
-export const SideBar = ({ isHover, setHover }) => {
+export const SideBar = ({ isHover, setHover }: { isHover: boolean; setHover: any }) => {
   return (
     <div
       id="sideBar"

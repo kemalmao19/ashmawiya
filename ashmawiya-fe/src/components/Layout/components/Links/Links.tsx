@@ -8,24 +8,24 @@ type Menu = {
   icon: JSX.Element;
 };
 
-export const Links = ({ isHover }) => {
-  const { state, dispatch } = useContext(StateContext);
+export const Links = ({ isHover }: { isHover: boolean }) => {
+  const { state, dispatch } = useContext(StateContext)!;
 
   const menus: Menu[] = [
     {
       name: "Dashboard",
       link: "#",
-      icon: (<House />) as JSX.Element,
+      icon: (<House />),
     },
     {
       name: "Courses",
       link: "#",
-      icon: (<GraduationCap />) as JSX.Element,
+      icon: (<GraduationCap />),
     },
     {
       name: "Resources",
       link: "#",
-      icon: (<Folder />) as JSX.Element,
+      icon: (<Folder />),
     },
   ];
 
@@ -39,7 +39,7 @@ export const Links = ({ isHover }) => {
           style={{
             color: menu.name === state.panel.type ? "black" : "",
           }}
-          onClick={() => dispatch({ type: menu.name })}
+          onClick={() => dispatch({type: menu.name} as Panel)}
         >
           {menu.icon}
           {isHover ? <p>{menu.name}</p> : null}

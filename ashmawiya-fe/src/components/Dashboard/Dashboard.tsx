@@ -18,7 +18,7 @@ const showPanel = (panel: Panel["type"]) => {
   }
 };
 
-export const StateContext = createContext();
+export const StateContext = createContext<ContextType|undefined>(undefined);
 
 function Dashboard() {
   const [state, dispatch] = useReducer(reducer, initialState);

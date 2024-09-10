@@ -1,6 +1,16 @@
 import { firstWord } from "../../../lib/firstWord";
-const { username } = JSON.parse(localStorage.getItem("user") || "{}");
-const nameWord = firstWord(username);
+
+const checkUsername = () => {
+  const { username } = JSON.parse(localStorage.getItem("user") || "{}");
+  if (username) {
+    return firstWord(username);
+  }  else {
+    return "😊";
+  }
+}
+
+// const nameWord = firstWord(username);
+const nameWord = checkUsername();
 export const Header = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="w-full">

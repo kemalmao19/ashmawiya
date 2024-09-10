@@ -7,6 +7,8 @@ export const AuthCheck = (props: { children: JSX.Element }) => {
     useEffect(()=>{
         if (!Cookies.get("token")) {
             nav("/login")
+        } else {
+            nav("/dashboard")
         }
     }, [])
     return (

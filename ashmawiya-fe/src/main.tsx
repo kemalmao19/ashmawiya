@@ -15,8 +15,8 @@ createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/dashboard" element={<AuthCheck><Dashboard /></AuthCheck>} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<AuthCheck><Register /></AuthCheck>} />
+        <Route path="/login" element={<AuthCheck><Login /></AuthCheck>} />
       </Routes>
       <Toaster />
     </BrowserRouter>

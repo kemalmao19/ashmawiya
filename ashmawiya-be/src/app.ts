@@ -46,7 +46,7 @@ app.post("/api/users", async (req, res) => {
     // Hash the password
     const hashedPassword: string = await bcrypt.hash(password, 10);
 
-    const user = await prisma.user.create({
+    const user: any = await prisma.user.create({
       data: <Register>{
         username,
         email,
@@ -93,9 +93,9 @@ app.post("/api/users/login", async (req, res) => {
       email: findUser.email,
     };
 
-    const secret = process.env.JWT_SECRET;
+    const secret = process.env.JWT_SECRET as string;
 
-    const token = sign(payload, secret as string, { expiresIn: "7d" });
+    const token = sign(payload, secret, { expiresIn: "7d" });
     Cookies.set("token", token);
 
     return res.status(200).json({

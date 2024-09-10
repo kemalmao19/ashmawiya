@@ -47,7 +47,7 @@ app.post("/api/users", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await prisma.user.create({
-      data: {
+      data: <User>{
         username,
         email,
         password: hashedPassword,

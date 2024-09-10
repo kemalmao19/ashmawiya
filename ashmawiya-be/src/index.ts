@@ -10,6 +10,10 @@ app.use(cors());
 
 const prisma = new PrismaClient();
 
+app.get("/", (req, res) => {
+  res.send("Server is running...");
+})
+
 app.get("/api/users", async (req, res) => {
   const users = await prisma.user.findMany();
 

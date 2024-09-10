@@ -44,10 +44,10 @@ app.post("/api/users", async (req, res) => {
     }
 
     // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword: string = await bcrypt.hash(password, 10);
 
     const user = await prisma.user.create({
-      data: <User>{
+      data: <Register>{
         username,
         email,
         password: hashedPassword,
@@ -87,7 +87,7 @@ app.post("/api/users/login", async (req, res) => {
       return res.status(401).json({ errorMessage: "Incorrect password" });
     }
 
-    const payload = {
+    const payload: Payload = {
       id: findUser.id,
       username: findUser.username,
       email: findUser.email,

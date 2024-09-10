@@ -62,9 +62,9 @@ export const useSubmit = () => {
         return;
       }
       // Successfully Login
-      const data = await response.json();
-      console.log("Login successful:", data);
-      Cookies.set("token", data.token);
+      const {data, message, token} = await response.json();
+      console.log(message);
+      Cookies.set("token", token);
       localStorage.setItem("user", JSON.stringify(data));
 
       toast.success("Login Successful");

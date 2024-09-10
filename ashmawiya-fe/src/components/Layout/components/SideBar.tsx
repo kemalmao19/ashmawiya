@@ -1,5 +1,6 @@
 import { Links } from "./Links/Links";
 import { NotebookText, LogOut } from "lucide-react";
+import { logout } from "../../../utils/logout";
 export const SideBar = ({ isHover, setHover }: { isHover: boolean; setHover: (value: boolean) => void }) => {
   return (
     <div
@@ -19,6 +20,7 @@ export const SideBar = ({ isHover, setHover }: { isHover: boolean; setHover: (va
       <div
         id="logout"
         className="flex justify-center gap-2 items-center text-gray-300 hover:text-black cursor-pointer transition-all ease-out delay-100"
+        onClick={() => logout()}
       >
         {" "}
         {isHover ? <p>Logout</p> : null}

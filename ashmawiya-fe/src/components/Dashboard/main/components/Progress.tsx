@@ -1,6 +1,7 @@
 import { Eye, CircleCheckBig, CircleHelp } from "lucide-react";
 
-const {data} = JSON.parse(localStorage.getItem("user") || "{}");
+// const {data} = JSON.parse(localStorage.getItem("user") || "{}");
+const data = {username: "fake"}
 
 const progress = [
   {

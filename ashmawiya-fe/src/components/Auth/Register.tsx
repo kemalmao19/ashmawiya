@@ -1,5 +1,6 @@
 import { useSubmit } from "./hooks/useSubmit";
 import { Layout } from "./Layout";
+import { Link } from "react-router-dom";
 
 export const Register = () => {
   const { handleRegister } = useSubmit();
@@ -38,12 +39,14 @@ export const Register = () => {
           className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
+
         <button
           type="submit"
           className="mt-4 bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition-all duration-300"
         >
           Register
         </button>
+        <div>Already have account? <Link to="/login" className="hover:text-black">Login</Link></div>
       </form>
     </Layout>
   );

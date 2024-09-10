@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { checkEnvironment } from "../../../config/apiUrl";
 import toast from "react-hot-toast";
 import Cookies from 'js-cookie'
 
@@ -8,6 +9,7 @@ export const useSubmit = () => {
   const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
+    console.log(checkEnvironment());
     if (isLogin) {
       navigate("/dashboard");
     }
@@ -18,7 +20,7 @@ export const useSubmit = () => {
     const formData = new FormData(e.currentTarget);
     const payload = Object.fromEntries(formData.entries());
     try {
-      const response = await fetch("http://localhost:5000/api/users", {
+      const response = await fetch(checkEnvironment() + "/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,3 +1,6 @@
+import { firstWord } from "../../../lib/firstWord";
+const { username } = JSON.parse(localStorage.getItem("user") || "{}");
+const nameWord = firstWord(username);
 export const Header = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="w-full">
@@ -5,7 +8,7 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
         <div className="flex-1">
           <div className="form-control">
             <input
-            id="search"
+              id="search"
               type="text"
               placeholder="Search"
               className="input input-bordered w-24 md:w-auto"
@@ -19,11 +22,10 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
               role="button"
               className="btn btn-ghost btn-circle avatar"
             >
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
+              <div className="avatar placeholder">
+                <div className="bg-neutral text-neutral-content w-12 rounded-full">
+                  <span>{nameWord}</span>
+                </div>
               </div>
             </div>
             <ul

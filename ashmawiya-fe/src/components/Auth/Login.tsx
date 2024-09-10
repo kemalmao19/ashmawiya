@@ -17,9 +17,11 @@ export const Login = () => {
           Email
         </label>
         <input
+        id="email"
           name="email"
           type="email"
           placeholder="Enter your email"
+          autoComplete="on"
           className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
@@ -27,6 +29,7 @@ export const Login = () => {
           Password
         </label>
         <input
+        id="password"
           name="password"
           type="password"
           placeholder="Enter your password"
@@ -38,7 +41,7 @@ export const Login = () => {
           type="submit"
           className="mt-4 bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition-all duration-300"
         >
-          Register
+          Login
         </button>
         <div>
           Already have account? <Link to="/register" className="hover:text-black">Register</Link>

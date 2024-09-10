@@ -13,9 +13,11 @@ export const Register = () => {
           Username
         </label>
         <input
+        id="username"
           name="username"
           type="text"
           placeholder="Enter your username"
+          autoComplete="on"
           className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
@@ -23,9 +25,11 @@ export const Register = () => {
           Email
         </label>
         <input
+        id="email"
           name="email"
           type="email"
           placeholder="Enter your email"
+          autoComplete="on"
           className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
@@ -33,6 +37,7 @@ export const Register = () => {
           Password
         </label>
         <input
+        id="password"
           name="password"
           type="password"
           placeholder="Enter your password"

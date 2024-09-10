@@ -1,7 +1,6 @@
 import { Eye, CircleCheckBig, CircleHelp } from "lucide-react";
 
-// const {data} = JSON.parse(localStorage.getItem("user") || "{}");
-const data = {username: "fake"}
+const {username} = JSON.parse(localStorage.getItem("user") || "{}");
 
 const progress = [
   {
@@ -25,7 +24,7 @@ export const Progress = () => {
   return (
     <div id="section1" className="flex flex-col space-y-6">
       <div id="head" className="text-black">
-        <h1 className="text-lg">{`Welcome back ${data.username}!`}</h1>
+        <h1 className="text-lg">{`Welcome back ${username}!`}</h1>
         <p className="text-sm">Here overview of your course</p>
       </div>
       <div id="progress" className="grid grid-cols-3 gap-6">

@@ -17,7 +17,6 @@ export const useSubmit = () => {
     // Creating an object from form data
     const formData = new FormData(e.currentTarget);
     const payload = Object.fromEntries(formData.entries());
-    console.log(payload);
     try {
       const response = await fetch("http://localhost:5000/api/users", {
         method: "POST",
@@ -33,9 +32,12 @@ export const useSubmit = () => {
         return;
       }
       // Successfully registered
-      const data = await response.json();
-      console.log("Registration successful:", data);
-      alert("Registration successful!");
+      // const data = await response.json();
+      // console.log("Registration successful:", data.user);
+      toast.success("Registration Successful");
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (error) {
       // Handle network errors or other unexpected issues
       console.error("Error registering user:", error);

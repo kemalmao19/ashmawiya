@@ -5,6 +5,7 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
         <div className="flex-1">
           <div className="form-control">
             <input
+            id="search"
               type="text"
               placeholder="Search"
               className="input input-bordered w-24 md:w-auto"

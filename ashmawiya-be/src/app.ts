@@ -26,18 +26,20 @@ app.get("/api/users", async (req, res) => {
 
 app.post("/api/users", async (req, res) => {
   const { username, email, password } = req.body;
+  
+  if (!email || !username || !password) {
+    return res.status(400).json({ message: "All fields are required." });
+  }
+
   try {
 
     // Check if the user already exists
     const existingMail = await prisma.user.findUnique({
       where: { email },
     });
-    const existingUser = await prisma.user.findUnique({
-      where: { username },
-    })
 
 
-    if (existingUser || existingMail) {
+    if (existingMail) {
       return res
         .status(409)
         .json({ message: "User already exists with this email/username." });
@@ -46,8 +48,8 @@ app.post("/api/users", async (req, res) => {
     // Hash the password
     const hashedPassword: string = await bcrypt.hash(password, 10);
 
-    const user: any = await prisma.user.create({
-      data: <Register>{
+    const user = await prisma.user.create({
+      data: {
         username,
         email,
         password: hashedPassword,
@@ -65,15 +67,15 @@ app.post("/api/users", async (req, res) => {
 });
 
 app.post("/api/users/login", async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
   try {
-    if (!username || !password) {
-      return res.status(400).json({ errorMessage: "Username and password are required" });
+    if (!email || !password) {
+      return res.status(400).json({ errorMessage: "Email and password are required" });
     }
     
     const findUser = await prisma.user.findUnique({
       where: {
-        username,
+        email,
       },
     });
   
@@ -87,7 +89,7 @@ app.post("/api/users/login", async (req, res) => {
       return res.status(401).json({ errorMessage: "Incorrect password" });
     }
 
-    const payload: Payload = {
+    const payload = {
       id: findUser.id,
       username: findUser.username,
       email: findUser.email,
@@ -97,6 +99,7 @@ app.post("/api/users/login", async (req, res) => {
 
     const token = sign(payload, secret, { expiresIn: "7d" });
     Cookies.set("token", token);
+    Cookies.set("username", findUser.username);
 
     return res.status(200).json({
       data: payload,

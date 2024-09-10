@@ -4,7 +4,7 @@ import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import {sign} from "jsonwebtoken";
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 
 const app = express();
 const port = process.env.PORT;
@@ -98,8 +98,7 @@ app.post("/api/users/login", async (req, res) => {
     const secret = process.env.JWT_SECRET as string;
 
     const token = sign(payload, secret, { expiresIn: "7d" });
-    Cookies.set("token", token);
-    Cookies.set("username", findUser.username);
+    // Cookies.set("token", token);
 
     return res.status(200).json({
       data: payload,

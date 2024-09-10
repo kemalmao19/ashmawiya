@@ -21,8 +21,8 @@ export const SideBar = ({ isHover, setHover }: { isHover: boolean; setHover: (va
         className="flex justify-center gap-2 items-center text-gray-300 hover:text-black cursor-pointer transition-all ease-out delay-100"
       >
         {" "}
-        <LogOut />
         {isHover ? <p>Logout</p> : null}
+        <LogOut />
       </div>
     </div>
   );

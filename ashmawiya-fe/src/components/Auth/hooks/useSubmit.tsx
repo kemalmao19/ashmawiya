@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import Cookies from 'js-cookie'
+
+
 export const useSubmit = () => {
   const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
@@ -42,7 +46,7 @@ export const useSubmit = () => {
     // Creating an object from form data
     const formData = new FormData(e.currentTarget);
     const payload = Object.fromEntries(formData.entries());
-    console.log(payload);
+
     try {
       const response = await fetch("http://localhost:5000/api/users/login", {
         method: "POST",
@@ -60,8 +64,13 @@ export const useSubmit = () => {
       // Successfully Login
       const data = await response.json();
       console.log("Login successful:", data);
-      alert("Login successful!");
-      setIsLogin(!isLogin);
+      Cookies.set("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data));
+
+      toast.success("Login Successful");
+      setTimeout(() => {
+        setIsLogin(!isLogin);
+      }, 2000);
     } catch (error) {
       // Handle network errors or other unexpected issues
       console.error("Error Login user:", error);

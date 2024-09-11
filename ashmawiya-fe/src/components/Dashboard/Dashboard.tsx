@@ -2,6 +2,7 @@ import { useReducer, createContext } from "react";
 import { reducer, initialState } from "../../state/state";
 import { Layout } from "../Layout/Layout";
 import { Main } from "./main/Main";
+import { LogoutModal } from "../Modal/LogoutModal";
 import { Courses } from "./courses/Courses";
 import { Resources } from "./resources/Resources";
 
@@ -26,6 +27,7 @@ function Dashboard() {
   return (
     <StateContext.Provider value={{ state, dispatch }}>
       <Layout>{showPanel(state.panel.type)}</Layout>
+      <LogoutModal />
     </StateContext.Provider>
   );
 }

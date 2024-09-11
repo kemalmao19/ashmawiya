@@ -1,13 +1,14 @@
 import { firstWord } from "../../../lib/firstWord";
+import { LogoutOpener } from "../../Modal/LogoutModal";
 
 const checkUsername = () => {
   const { username } = JSON.parse(localStorage.getItem("user") || "{}");
   if (username) {
     return firstWord(username);
-  }  else {
+  } else {
     return "😊";
   }
-}
+};
 
 // const nameWord = firstWord(username);
 const nameWord = checkUsername();
@@ -51,9 +52,7 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
               <li>
                 <a>Settings</a>
               </li>
-              <li>
-                <a>Logout</a>
-              </li>
+              <LogoutOpener />
             </ul>
           </div>
         </div>

@@ -32,7 +32,9 @@ export const useSubmit = () => {
       if (!response.ok) {
         // Handle errors, e.g., 400 or 500 responses
         const errorData = await response.json();
-        console.log("register failed", errorData);
+        toast.error(errorData.message);
+        console.log("register failed", errorData.message);
+        setIsLoading(false);
         return;
       }
       // Successfully registered
@@ -45,6 +47,7 @@ export const useSubmit = () => {
       }, 2000);
     } catch (error) {
       // Handle network errors or other unexpected issues
+      toast.error("Registration Failed");
       console.error("Error registering user:", error);
     }
   };
@@ -66,7 +69,9 @@ export const useSubmit = () => {
       if (!response.ok) {
         // Handle errors, e.g., 400 or 500 responses
         const errorData = await response.json();
-        console.log("Login failed", errorData);
+        toast.error(errorData.message);
+        console.log("Login failed", errorData.message);
+        setIsLoading(false);
         return;
       }
       // Successfully Login
@@ -82,10 +87,9 @@ export const useSubmit = () => {
       }, 2000);
     } catch (error) {
       // Handle network errors or other unexpected issues
+      toast.error("Login Failed");
       console.error("Error Login user:", error);
     }
   };
   return { useRegister, handleLogin };
 };
-
-// export default useSubmit;

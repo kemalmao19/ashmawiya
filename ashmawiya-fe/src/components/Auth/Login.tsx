@@ -45,7 +45,7 @@ export const Login = () => {
           type="submit"
           className={`mt-4 ${isLoading ? "cursor-not-allowed opacity-50" : ""} bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition-all duration-300`}
         >
-          Login
+          {isLoading ? "Loading..." : "Login"}
         </button>
         <div>
           Already have account? <Link to="/register" className="hover:text-black">Register</Link>

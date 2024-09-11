@@ -1,14 +1,17 @@
+import { useState } from "react";
 import { useSubmit } from "./hooks/useSubmit";
 import { Layout } from "./Layout";
 import { Link } from "react-router-dom";
 
 export const Register = () => {
-  const { handleRegister } = useSubmit();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { useRegister } = useSubmit();
 
   return (
     <Layout>
       <h1 className="text-2xl font-semibold text-center mb-6">Register</h1>
-      <form id="register" onSubmit={handleRegister} className="flex flex-col gap-4">
+      <form id="register" onSubmit={useRegister(setIsLoading)} className="flex flex-col gap-4">
         <label htmlFor="username" className="text-gray-700 font-medium">
           Username
         </label>
@@ -18,6 +21,7 @@ export const Register = () => {
           type="text"
           placeholder="Enter your username"
           autoComplete="on"
+          required
           className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
@@ -30,6 +34,7 @@ export const Register = () => {
           type="email"
           placeholder="Enter your email"
           autoComplete="on"
+          required
           className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
@@ -41,13 +46,14 @@ export const Register = () => {
           name="password"
           type="password"
           placeholder="Enter your password"
+          required
           className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
 
         <button
           type="submit"
-          className="mt-4 bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition-all duration-300"
+          className={`mt-4 ${isLoading ? "cursor-not-allowed opacity-50" : ""} bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition-all duration-300`}
         >
           Register
         </button>

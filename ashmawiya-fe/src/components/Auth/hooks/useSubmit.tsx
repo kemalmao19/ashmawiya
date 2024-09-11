@@ -8,18 +8,20 @@ import Cookies from 'js-cookie'
 export const useSubmit = () => {
   const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
+
   useEffect(() => {
-    console.log(checkEnvironment());
     if (isLogin) {
       navigate("/dashboard");
     }
   }, [isLogin]);
-  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+
+  const useRegister = (setIsLoading: (value: boolean) => void) => async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Creating an object from form data
     const formData = new FormData(e.currentTarget);
     const payload = Object.fromEntries(formData.entries());
     try {
+      setIsLoading(true);
       const response = await fetch(checkEnvironment() + "/users", {
         method: "POST",
         headers: {
@@ -39,19 +41,21 @@ export const useSubmit = () => {
       toast.success("Registration Successful");
       setTimeout(() => {
         navigate("/login");
+        setIsLoading(false);
       }, 2000);
     } catch (error) {
       // Handle network errors or other unexpected issues
       console.error("Error registering user:", error);
     }
   };
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = (setIsLoading: (value: boolean) => void) => async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Creating an object from form data
     const formData = new FormData(e.currentTarget);
     const payload = Object.fromEntries(formData.entries());
 
     try {
+      setIsLoading(true);
       const response = await fetch(checkEnvironment() + "/users/login", {
         method: "POST",
         headers: {
@@ -74,11 +78,14 @@ export const useSubmit = () => {
       toast.success("Login Successful");
       setTimeout(() => {
         setIsLogin(!isLogin);
+        setIsLoading(false);
       }, 2000);
     } catch (error) {
       // Handle network errors or other unexpected issues
       console.error("Error Login user:", error);
     }
   };
-  return { handleRegister, handleLogin };
+  return { useRegister, handleLogin };
 };
+
+// export default useSubmit;

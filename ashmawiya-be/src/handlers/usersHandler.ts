@@ -2,8 +2,10 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { sign } from "jsonwebtoken";
 import prisma from "../config/prisma";
+import { RegisterUserDto, LoginUserDto } from "../dtos/User.dto";
+import { Message, User } from "../types/response";
 
-export const getUsers = async (req: Request, res: Response) => {
+export const getUsers = async (req: Request, res: Response<User[]>) => {
   const users = await prisma.user.findMany({
     select: {
       id: true,
@@ -15,7 +17,7 @@ export const getUsers = async (req: Request, res: Response) => {
   res.json(users);
 };
 
-export const getUserById = async (req: Request, res: Response) => {
+export const getUserById = async (req: Request<{id: number}>, res: Response<Message | User>) => {
   const { id } = req.params;
   if (!id) {
     return res.status(400).json({ message: "ID is required" });
@@ -35,7 +37,7 @@ export const getUserById = async (req: Request, res: Response) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.json(user);
+    return res.json(user);
   } catch (error) {
     console.error("Error fetching user:", error);
     // Log error for debugging
@@ -43,7 +45,7 @@ export const getUserById = async (req: Request, res: Response) => {
   }
 };
 
-export const registerUser = async (req: Request, res: Response) => {
+export const registerUser = async (req: Request<{}, {}, RegisterUserDto>, res: Response<Message>) => {
   const { username, email, password } = req.body;
 
   if (!email || !username || !password) {
@@ -74,8 +76,7 @@ export const registerUser = async (req: Request, res: Response) => {
     });
     // Send the user data back
     return res.status(201).json({
-      message: "User created successfully.",
-      user,
+      message: "User created successfully."
     });
   } catch (error) {
     console.error("Error creating user:", error);
@@ -83,13 +84,13 @@ export const registerUser = async (req: Request, res: Response) => {
   }
 };
 
-export const loginUser = async (req: Request, res: Response) => {
+export const loginUser = async (req: Request<{},{}, LoginUserDto>, res: Response<{data: User, message: string} | Message>) => {
   const { email, password } = req.body;
   try {
     if (!email || !password) {
       return res
         .status(400)
-        .json({ errorMessage: "Email and password are required" });
+        .json({ message: "Email and password are required" });
     }
 
     const findUser = await prisma.user.findUnique({
@@ -99,16 +100,16 @@ export const loginUser = async (req: Request, res: Response) => {
     });
 
     if (!findUser) {
-      return res.status(404).json({ errorMessage: "User not found" });
+      return res.status(404).json({ message: "User not found" });
     }
 
     const isMatch = await bcrypt.compare(password, findUser.password);
 
     if (!isMatch) {
-      return res.status(401).json({ errorMessage: "Incorrect password" });
+      return res.status(401).json({ message: "Incorrect password" });
     }
 
-    const payload: { id: number; username: string; email: string } = {
+    const payload = {
       id: findUser.id,
       username: findUser.username,
       email: findUser.email,
@@ -117,12 +118,10 @@ export const loginUser = async (req: Request, res: Response) => {
     const secret = process.env.JWT_SECRET as string;
 
     const token = sign(payload, secret, { expiresIn: "7d" });
-    // Cookies.set("token", token);
 
     return res.status(200).json({
       data: payload,
-      message: "Login successful",
-      token,
+      message: "Login successful"
     });
   } catch (error) {
     console.error("Error creating user:", error);
@@ -130,7 +129,7 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 };
 
-export const updateUser = async (req: Request, res: Response) => {
+export const updateUser = async (req: Request<{id: number}, {}, User&{password: string} >, res: Response<Message>) => {
   const { id } = req.params;
   const { username, email, password } = req.body;
   if (!id) {
@@ -141,7 +140,7 @@ export const updateUser = async (req: Request, res: Response) => {
 
     const user = await prisma.user.update({
       where: {
-        id: Number(id), // Ensure ID is converted to number for consistent comparison
+        id: Number(id),
       },
       data: {
         username,

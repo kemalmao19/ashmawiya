@@ -4,9 +4,14 @@ https://ashmawiya-be.vercel.app/api
 
 ## Getting Started
 
-### Get All Users
+### Get Users
+#### All Users
 ```
 GET /api/users
+```
+#### Single User
+```
+GET /api/users/:id
 ```
 
 ### Authentication
@@ -17,11 +22,16 @@ POST /api/users
 *json body: username, email, password*
 
 #### Login
-
 ```
 POST /api/users/login
 ``` 
 *json body: email, password*
+
+### Update User
+```
+PUT /api/users/:id
+```
+*json body: username?, email?, password?*
 
 
 -----------------------------------------------------

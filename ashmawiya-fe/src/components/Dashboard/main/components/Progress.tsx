@@ -2,25 +2,27 @@ import { Eye, CircleCheckBig, CircleHelp } from "lucide-react";
 
 const {username} = JSON.parse(localStorage.getItem("user") || "{}");
 
-const progress = [
-  {
-    title: "Total Watched",
-    icon: <Eye />,
-    number: 1000 + "h",
-  },
-  {
-    title: "Completed",
-    icon: <CircleCheckBig />,
-    number: 1000,
-  },
-  {
-    title: "Quiz Score",
-    icon: <CircleHelp />,
-    number: 1000,
-  },
-];
+export const Progress = ({data}: {data?: UserCourse[]}) => {
+  const totalWatched = data?.reduce((acc, course) => acc + course.watchedTime, 0);
+  const totalCompleted = data?.reduce((acc, course) => acc + (course.isCompleted ? 1 : 0), 0);
 
-export const Progress = () => {
+  const progress = [
+    {
+      title: "Total Watched",
+      icon: <Eye />,
+      number: totalWatched + "m",
+    },
+    {
+      title: "Completed",
+      icon: <CircleCheckBig />,
+      number: totalCompleted,
+    },
+    {
+      title: "Quiz Score",
+      icon: <CircleHelp />,
+      number: 1000,
+    },
+  ];
   return (
     <div id="section1" className="flex flex-col space-y-6">
       <div id="head" className="text-black">

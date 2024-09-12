@@ -1,11 +1,28 @@
 export type User = {
-    id?: number, username: string, email: string, password?: string
-}
+  id?: number;
+  username: string;
+  email: string;
+  courses?: UserCourse[];
+  password?: string;
+};
 
 export type Course = {
-    id?: number, title: string, url: string, videoDuration: number}
+  id?: number;
+  title: string;
+  url: string;
+  videoDuration: number;
+};
 
+export type UserCourse = {
+  id: number;
+  userId: number;
+  courseId: number;
+  watchedTime: number;
+  isCompleted: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 export type Message = {
-    message: string
-}
+  message: string;
+};

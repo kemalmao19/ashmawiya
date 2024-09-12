@@ -17,7 +17,7 @@ export const getUsers = async (req: Request, res: Response<User[]>) => {
   res.json(users);
 };
 
-export const getUserById = async (req: Request<{id: number}>, res: Response<Message | User>) => {
+export const getUserById = async (req: Request<{id: number}>, res: Response) => {
   const { id } = req.params;
   if (!id) {
     return res.status(400).json({ message: "ID is required" });
@@ -25,12 +25,13 @@ export const getUserById = async (req: Request<{id: number}>, res: Response<Mess
   try {
     const user = await prisma.user.findUnique({
       where: {
-        id: Number(id), // Ensure ID is converted to number for consistent comparison
+        id: Number(id),
       },
       select: {
         id: true,
         username: true,
         email: true,
+        courses: true,
       },
     });
 

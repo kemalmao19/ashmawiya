@@ -2,6 +2,7 @@ import express from "express";
 import "./config/loadEnv";
 import usersRouter from "./routes/users";
 import coursesRouter from "./routes/courses";
+import usersCourseRouter from "./routes/usersCourse";
 import cors from "cors";
 // import Cookies from 'js-cookie'
 
@@ -20,6 +21,9 @@ app.use("/api/users", usersRouter);
 
 // COURSES ENDPOINTS
 app.use("/api/courses", coursesRouter);
+
+// USERS COURSES ENDPOINTS
+app.use('/api/usercourse', usersCourseRouter)
 
 
 app.listen(port, () => {

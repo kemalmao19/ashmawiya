@@ -1,9 +1,19 @@
 type UserCourse = {
+  user: {
+    id: number;
+    username: string;
+  };
+  course: {
+    id: number;
+    title: string;
+    videoDuration: number;
+  };
+} & {
   id: number;
   userId: number;
   courseId: number;
   watchedTime: number;
-  isCompleted: boolean;
+  isComplete: boolean;
   createdAt: Date;
   updatedAt: Date;
 };

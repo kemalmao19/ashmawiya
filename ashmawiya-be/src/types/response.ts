@@ -18,7 +18,7 @@ export type UserCourse = {
   userId: number;
   courseId: number;
   watchedTime: number;
-  isCompleted: boolean;
+  isComplete: boolean;
   createdAt: Date;
   updatedAt: Date;
 };

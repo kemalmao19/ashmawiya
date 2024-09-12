@@ -3,14 +3,16 @@ import { Eye, CircleCheckBig, CircleHelp } from "lucide-react";
 const {username} = JSON.parse(localStorage.getItem("user") || "{}");
 
 export const Progress = ({data}: {data?: UserCourse[]}) => {
-  const totalWatched = data?.reduce((acc, course) => acc + course.watchedTime, 0);
-  const totalCompleted = data?.reduce((acc, course) => acc + (course.isCompleted ? 1 : 0), 0);
+  const totalCompleted = data?.reduce((acc, course) => acc + (course.isComplete ? 1 : 0), 0);
+  const totalDuration = data?.reduce((acc, d) => d.isComplete ? acc + d.course.videoDuration : acc, 0);
+
+  console.log(totalDuration)
 
   const progress = [
     {
       title: "Total Watched",
       icon: <Eye />,
-      number: totalWatched + "m",
+      number: totalDuration + "m",
     },
     {
       title: "Completed",

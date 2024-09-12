@@ -1,8 +1,8 @@
 import { firstWord } from "../../../lib/firstWord";
 import { LogoutOpener } from "../../Modal/LogoutModal";
 
+const { username } = JSON.parse(localStorage.getItem("user") || "{}");
 const checkUsername = () => {
-  const { username } = JSON.parse(localStorage.getItem("user") || "{}");
   if (username) {
     return firstWord(username);
   } else {
@@ -10,19 +10,19 @@ const checkUsername = () => {
   }
 };
 
-// const nameWord = firstWord(username);
 const nameWord = checkUsername();
+
 export const Header = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="w-full">
-      <div className="navbar bg-base-100 p-4">
+      <div className="navbar p-6">
         <div className="flex-1">
           <div className="form-control">
             <input
               id="search"
               type="text"
               placeholder="Search"
-              className="input input-bordered w-24 md:w-auto"
+              className="input input-bordered bg-white w-24 md:w-auto"
             />
           </div>
         </div>
@@ -34,7 +34,7 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="avatar placeholder">
-                <div className="bg-neutral text-neutral-content w-12 rounded-full">
+                <div className="bg-black text-neutral-content w-10 rounded-full">
                   <span>{nameWord}</span>
                 </div>
               </div>
@@ -43,6 +43,7 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
+              <p className="p-2 flex justify-center">{username}</p>
               <li>
                 <a className="justify-between">
                   Profile

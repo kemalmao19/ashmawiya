@@ -1,25 +1,21 @@
 import { useEffect, useState } from "react";
 import { checkEnvironment } from "../../../../config/apiUrl";
 
-export const getUser = (id: number) => (setData: (data: any) => void) => {
-  fetch(checkEnvironment() + `/users/${id}`)
+export const getUserCourse = (id: number) => (setData: (data: any) => void) => {
+  fetch(checkEnvironment() + `/usercourse/${id}`)
     .then((response) => response.json())
     .then((data) => setData(data));
 };
 
 const useData = (id: number) => {
-  const [user, setUser] = useState<User>({
-    username: "",
-    email: "",
-    courses: [],
-  });
+  const [userCourse, setUserCourse] = useState<UserCourse[]>([]);
 
   useEffect(() => {
-    getUser(id)(setUser);
+    getUserCourse(id)(setUserCourse);
   }, []);
 
   return {
-    user,
+    userCourse,
   };
 };
 

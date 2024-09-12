@@ -4,7 +4,7 @@ export const SideBar = ({ isHover, setHover }: { isHover: boolean; setHover: (va
   return (
     <div
       id="sideBar"
-      className="flex flex-col justify-between bg-white h-screen px-4 py-8 transition-all duration-300 ease-in-out"
+      className="fixed flex flex-col justify-between bg-white h-screen px-4 py-8 transition-all duration-300 ease-in-out"
       onMouseEnter={() => setHover(!isHover)}
       onMouseLeave={() => setHover(!isHover)}
     >

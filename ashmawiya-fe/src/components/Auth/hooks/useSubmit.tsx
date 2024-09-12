@@ -11,7 +11,8 @@ export const useSubmit = () => {
 
   useEffect(() => {
     if (isLogin) {
-      navigate("/dashboard");
+      // navigate("/dashboard");
+      window.location.reload();
     }
   }, [isLogin]);
 

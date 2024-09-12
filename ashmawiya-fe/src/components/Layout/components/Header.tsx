@@ -14,7 +14,7 @@ const nameWord = checkUsername();
 
 export const Header = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="w-full">
+    <div className="w-full pl-14">
       <div className="navbar p-6">
         <div className="flex-1">
           <div className="form-control">

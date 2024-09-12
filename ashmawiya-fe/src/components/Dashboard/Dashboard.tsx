@@ -19,14 +19,16 @@ const showPanel = (panel: Panel["type"]) => {
   }
 };
 
-export const StateContext = createContext<ContextType|undefined>(undefined);
+export const StateContext = createContext<ContextType | undefined>(undefined);
 
 function Dashboard() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <StateContext.Provider value={{ state, dispatch }}>
-      <Layout>{showPanel(state.panel.type)}</Layout>
+      <Layout>
+        {showPanel(state.panel.type)}
+      </Layout>
       <LogoutModal />
     </StateContext.Provider>
   );

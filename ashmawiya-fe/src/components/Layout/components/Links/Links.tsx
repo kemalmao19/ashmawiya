@@ -9,7 +9,7 @@ type Menu = {
 };
 
 export const Links = ({ isHover }: { isHover: boolean }) => {
-  const { state, dispatch } = useContext(StateContext)!;
+  const { state, dispatch } = useContext(StateContext) as stateContext;
 
   const menus: Menu[] = [
     {

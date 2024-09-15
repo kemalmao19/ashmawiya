@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { House, GraduationCap, Folder } from "lucide-react";
 import { StateContext } from "../../../../state/context";
+import { Link } from "react-router-dom";
 
 type Menu = {
   name: string;
@@ -14,17 +15,17 @@ export const Links = ({ isHover }: { isHover: boolean }) => {
   const menus: Menu[] = [
     {
       name: "Dashboard",
-      link: "#",
+      link: "/dashboard",
       icon: <House />,
     },
     {
       name: "Courses",
-      link: "#",
+      link: "/dashboard/courses",
       icon: <GraduationCap />,
     },
     {
       name: "Resources",
-      link: "#",
+      link: "/dashboard/resources",
       icon: <Folder />,
     },
   ];
@@ -32,7 +33,8 @@ export const Links = ({ isHover }: { isHover: boolean }) => {
   return (
     <div id="menus" className="flex flex-col space-y-8">
       {menus.map((menu) => (
-        <div
+        <Link
+          to={menu.link}
           id="menu"
           key={menu.name}
           className="flex items-center gap-3 cursor-pointer hover:text-black transition-all ease-out delay-100"
@@ -43,7 +45,7 @@ export const Links = ({ isHover }: { isHover: boolean }) => {
         >
           {menu.icon}
           {isHover ? <p>{menu.name}</p> : null}
-        </div>
+        </Link>
       ))}
     </div>
   );

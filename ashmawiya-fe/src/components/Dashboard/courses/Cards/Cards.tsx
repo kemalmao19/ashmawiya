@@ -1,16 +1,20 @@
 import useData from "../../hooks/useData";
 import { Link } from "react-router-dom";
 
+const coursePredicate = (state: State) => (str: string) =>
+  state.courses.value.filter((x) => x.tag === str);
+
 export const Cards = () => {
   const { state } = useData();
-  const groupping = (state: State): tagGroup => ({
-    wudu: state.courses.value.filter((x) => x.tag === "wudu"),
-    ghusl: state.courses.value.filter((x) => x.tag === "ghusl"),
-    tayammum: state.courses.value.filter((x) => x.tag === "tayammum"),
-    salaat: state.courses.value.filter((x) => x.tag === "salaat"),
-    siyam: state.courses.value.filter((x) => x.tag === "siyam"),
+  const groupPredicate = coursePredicate(state);
+  const groupping = (): tagGroup => ({
+    wudu: groupPredicate("wudu"),
+    ghusl: groupPredicate("ghusl"),
+    tayammum: groupPredicate("tayammum"),
+    salaat: groupPredicate("salaat"),
+    siyam: groupPredicate("siyam"),
   });
-  const group = groupping(state);
+  const group = groupping();
 
   return (
     <div className="text-black space-y-4">
@@ -23,7 +27,7 @@ export const Cards = () => {
             <div className="grid grid-cols-3 gap-6">
               {group[tag].map((item: Course, index: number) => (
                 <Link
-                  to={`/courses/${item.id}`}
+                  to={`/dashboard/courses/${item.id}`}
                   key={index.toString()}
                   className="flex items-center gap-6 p-6 bg-white hover:bg-cyan-300 transition-all delay-100 rounded-lg shadow-md"
                 >

@@ -6,9 +6,11 @@ import { Main } from "./main/Main";
 import { LogoutModal } from "../Modal/LogoutModal";
 import { Courses } from "./courses/Courses";
 import { Resources } from "./resources/Resources";
+import { useParams } from "react-router-dom";
+import { capitalizeFirstLetter } from "../../lib/capitalizedFirst";
 
-const showPanel = (panel: Panel["type"]) => {
-  switch (panel) {
+const showPanel = (panel: Panel["type"]) => (params: string) => {
+  switch (panel && capitalizeFirstLetter(params)) {
     case "Dashboard":
       return <Main />;
     case "Courses":
@@ -22,9 +24,11 @@ const showPanel = (panel: Panel["type"]) => {
 
 function Dashboard() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const params = useParams();
+
   return (
     <StateContext.Provider value={{ state, dispatch }}>
-      <Layout>{showPanel(state.panel.type)}</Layout>
+      <Layout>{showPanel(state.panel.type)(params["*"] as string)}</Layout>
       <LogoutModal />
     </StateContext.Provider>
   );

@@ -15,7 +15,7 @@ createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route
-          path="/dashboard"
+          path="/dashboard/*"
           element={
             <AuthCheck>
               <Dashboard />

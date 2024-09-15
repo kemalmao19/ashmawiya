@@ -17,6 +17,12 @@ export const getAllCourses = (dispatch: (data: AllCourses) => void) => {
     .then((data) => dispatch({ type: "AllCourses", value: data }));
 };
 
+export const getSingleCourse = (id: number) => {
+  fetch(checkEnvironment() + `/courses/${id}`)
+    .then((response) => response.json())
+    .then((data) => console.log(data));
+};
+
 const useData = () => {
   const { state, dispatch } = useContext(StateContext) as ContextType;
 

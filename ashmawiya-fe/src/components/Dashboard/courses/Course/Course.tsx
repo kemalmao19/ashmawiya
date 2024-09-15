@@ -1,24 +1,24 @@
 import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { StateContext } from "../../../../state/context";
-import { checkEnvironment } from "../../../../config/apiUrl";
+// import { checkEnvironment } from "../../../../config/apiUrl";
 
-const updateData = async (endpoint: string, value) => {
-  const url = checkEnvironment() + endpoint;
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(value),
-    });
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-    // const json = await response.json();
-    console.log("update done");
-  } catch (error) {
-    console.error(error);
-  }
-};
+// const updateData = async (endpoint: string, value) => {
+//   const url = checkEnvironment() + endpoint;
+//   try {
+//     const response = await fetch(url, {
+//       method: "POST",
+//       body: JSON.stringify(value),
+//     });
+//     if (!response.ok) {
+//       throw new Error(`Response status: ${response.status}`);
+//     }
+//     // const json = await response.json();
+//     console.log("update done");
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
 export const Course = () => {
   const { id } = useParams();

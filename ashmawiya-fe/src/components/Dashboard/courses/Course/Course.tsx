@@ -1,13 +1,32 @@
+import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import useData from "../../hooks/useData";
-import { useState } from "react";
+import { StateContext } from "../../../../state/context";
+import { checkEnvironment } from "../../../../config/apiUrl";
+
+const updateData = async (endpoint: string, value) => {
+  const url = checkEnvironment() + endpoint;
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(value),
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    // const json = await response.json();
+    console.log("update done");
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const Course = () => {
   const { id } = useParams();
-  const { state } = useData();
+  const { state } = useContext(StateContext) as ContextType;
+
   const [start, setStart] = useState(false);
   const course = state.courses.value.find((course) => course.id === Number(id));
-  console.log(course);
+
   return (
     <div className="flex justify-center items-center my-16">
       <div>
@@ -29,7 +48,7 @@ export const Course = () => {
           ) : null}
         </div>
 
-        <h1>Mark as Done</h1>
+        <button>Mark as Done</button>
       </div>
     </div>
   );

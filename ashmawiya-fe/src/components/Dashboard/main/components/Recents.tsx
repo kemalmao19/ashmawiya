@@ -5,8 +5,6 @@ export const Recents = ({ data }: { data?: UserCourse[] }) => {
     return <div>No data</div>;
   }
 
-  console.log(data);
-
   return (
     <div id="recents" className="grid lg:grid-cols-3 text-black gap-6">
       <div className="col-span-2">

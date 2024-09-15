@@ -11,12 +11,12 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  username  String
-  email     String    @unique
-  password  String
+  id       Int    @id @default(autoincrement())
+  username String
+  email    String @unique
+  password String
 
-  courses   UserCourse[] // Many-to-many relationship with Course through UserCourse
+  courses UserCourse[] // Many-to-many relationship with Course through UserCourse
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -25,31 +25,32 @@ model User {
 }
 
 model Course {
-  id            Int          @id @default(autoincrement())
+  id            Int    @id @default(autoincrement())
   title         String
   url           String
-  videoDuration Int          // Total duration of the video in seconds
+  videoDuration Int
+  tag           String @default("tag")
 
-  users         UserCourse[] // Many-to-many relationship with User through UserCourse
+  users UserCourse[] // Many-to-many relationship with User through UserCourse
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model UserCourse {
-  id            Int      @id @default(autoincrement())
-  
-  user          User     @relation(fields: [userId], references: [id])
-  userId        Int
+  id Int @id @default(autoincrement())
 
-  course        Course   @relation(fields: [courseId], references: [id])
-  courseId      Int
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
 
-  watchedTime   Int      @default(0) // Time watched by the user in seconds
-  isComplete    Boolean  @default(false) // Indicates if the user has completed the course
+  course   Course @relation(fields: [courseId], references: [id])
+  courseId Int
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  watchedTime Int     @default(0) // Time watched by the user in seconds
+  isComplete  Boolean @default(false) // Indicates if the user has completed the course
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([userId, courseId]) // Ensure that each user-course pair is unique
 }

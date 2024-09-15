@@ -1,12 +1,16 @@
 import { Eye, CircleCheckBig, CircleHelp } from "lucide-react";
 
-const {username} = JSON.parse(localStorage.getItem("user") || "{}");
+const { username } = JSON.parse(localStorage.getItem("user") || "{}");
 
-export const Progress = ({data}: {data?: UserCourse[]}) => {
-  const totalCompleted = data?.reduce((acc, course) => acc + (course.isComplete ? 1 : 0), 0);
-  const totalDuration = data?.reduce((acc, d) => d.isComplete ? acc + d.course.videoDuration : acc, 0);
-
-  console.log(totalDuration)
+export const Progress = ({ data }: { data?: UserCourse[] }) => {
+  const totalCompleted = data?.reduce(
+    (acc, course) => acc + (course.isComplete ? 1 : 0),
+    0,
+  );
+  const totalDuration = data?.reduce(
+    (acc, d) => (d.isComplete ? acc + d.course.videoDuration : acc),
+    0,
+  );
 
   const progress = [
     {

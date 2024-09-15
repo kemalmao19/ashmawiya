@@ -1,3 +1,13 @@
+import { Cards } from "./Cards/Cards";
+
 export const Courses = () => {
-  return <div>ini Courses</div>;
+  return (
+    <div className="flex flex-col p-16 gap-9">
+      <div id="head" className="text-black">
+        <h1 className="text-lg">Courses</h1>
+        <p className="text-sm">Here are all ashamawiya courses available</p>
+      </div>
+      <Cards />
+    </div>
+  );
 };

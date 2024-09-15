@@ -1,18 +1,28 @@
 import { useContext, useEffect } from "react";
 import { checkEnvironment } from "../../../config/apiUrl";
-import { StateContext } from "../Dashboard";
+import { StateContext } from "../../../state/context";
 
-export const getUserCourse = (id: number) => (dispatch: (data: Usercourse) => void) => {
-  fetch(checkEnvironment() + `/usercourse/${id}`)
+const userId: number = JSON.parse(localStorage.getItem("user") || "{}").id;
+
+export const getUserCourse =
+  (id: number) => (dispatch: (data: Usercourse) => void) => {
+    fetch(checkEnvironment() + `/usercourse/${id}`)
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: "UserCourse", value: data }));
+  };
+
+export const getAllCourses = (dispatch: (data: AllCourses) => void) => {
+  fetch(checkEnvironment() + `/courses`)
     .then((response) => response.json())
-    .then((data) => dispatch({type: "UserCourse", value: data}));
+    .then((data) => dispatch({ type: "AllCourses", value: data }));
 };
 
-const useData = (id: number) => {
-  const {state, dispatch} = useContext(StateContext) as stateContext;
+const useData = () => {
+  const { state, dispatch } = useContext(StateContext) as ContextType;
 
   useEffect(() => {
-    getUserCourse(id)(dispatch);
+    getUserCourse(userId)(dispatch);
+    getAllCourses(dispatch);
   }, []);
 
   return {

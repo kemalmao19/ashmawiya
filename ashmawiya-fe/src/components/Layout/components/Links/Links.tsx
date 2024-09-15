@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { House, GraduationCap, Folder } from "lucide-react";
-import { StateContext } from "../../../Dashboard/Dashboard";
+import { StateContext } from "../../../../state/context";
 
 type Menu = {
   name: string;
@@ -9,23 +9,23 @@ type Menu = {
 };
 
 export const Links = ({ isHover }: { isHover: boolean }) => {
-  const { state, dispatch } = useContext(StateContext) as stateContext;
+  const { state, dispatch } = useContext(StateContext) as ContextType;
 
   const menus: Menu[] = [
     {
       name: "Dashboard",
       link: "#",
-      icon: (<House />),
+      icon: <House />,
     },
     {
       name: "Courses",
       link: "#",
-      icon: (<GraduationCap />),
+      icon: <GraduationCap />,
     },
     {
       name: "Resources",
       link: "#",
-      icon: (<Folder />),
+      icon: <Folder />,
     },
   ];
 
@@ -39,7 +39,7 @@ export const Links = ({ isHover }: { isHover: boolean }) => {
           style={{
             color: menu.name === state.panel.type ? "black" : "",
           }}
-          onClick={() => dispatch({type: menu.name} as Panel)}
+          onClick={() => dispatch({ type: menu.name } as Panel)}
         >
           {menu.icon}
           {isHover ? <p>{menu.name}</p> : null}

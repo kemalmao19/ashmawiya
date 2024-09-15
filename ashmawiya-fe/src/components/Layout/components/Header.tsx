@@ -15,16 +15,9 @@ const nameWord = checkUsername();
 export const Header = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="w-full pl-14">
-      <div className="navbar p-6">
+      <div className="navbar p-6 shadow-md">
         <div className="flex-1">
-          <div className="form-control">
-            <input
-              id="search"
-              type="text"
-              placeholder="Search"
-              className="input input-bordered bg-white w-24 md:w-auto"
-            />
-          </div>
+          <h1 className="text-black font-bold">ASHMAWIYA</h1>
         </div>
         <div className="flex-none gap-2">
           <div className="dropdown dropdown-end">

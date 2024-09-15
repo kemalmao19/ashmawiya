@@ -23,6 +23,7 @@ type Course = {
   title: string;
   url: string;
   videoDuration: number;
+  tag: string;
 };
 
 type User = {
@@ -31,4 +32,11 @@ type User = {
   email: string;
   courses?: UserCourse[];
   password?: string;
+};
+
+type tagGroup = {
+  wudu: Course[];
+  salaat: Course[];
+  siyam: Course[];
+  [key: string]: Course[];
 };

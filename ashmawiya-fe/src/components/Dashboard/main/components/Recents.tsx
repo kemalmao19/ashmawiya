@@ -1,9 +1,12 @@
-export const Recents = ({data}: {data?: UserCourse[]}) => {
+import { Link } from "react-router-dom";
 
+export const Recents = ({ data }: { data?: UserCourse[] }) => {
   if (!data) {
-    return <div>No data</div>
+    return <div>No data</div>;
   }
-    
+
+  console.log(data);
+
   return (
     <div id="recents" className="grid lg:grid-cols-3 text-black gap-6">
       <div className="col-span-2">
@@ -12,15 +15,16 @@ export const Recents = ({data}: {data?: UserCourse[]}) => {
           {data.map((x, i) => {
             return (
               i < 2 && (
-                <div
+                <Link
+                  to={`/dashboard/courses/${x.course.id}`}
                   key={x.course.id.toString()}
-                  className="flex items-center gap-6 p-6 bg-white rounded-lg shadow-md"
+                  className="flex items-center gap-6 p-6 bg-white hover:bg-cyan-300 transition-all delay-100 rounded-lg shadow-md cursor-pointer"
                 >
                   <div className="text-xl text-black py-2 px-4 bg-gray-300 rounded-md ">
                     {i + 1}
                   </div>
                   <h1 className="text-black text-lg">{x.course.title}</h1>
-                </div>
+                </Link>
               )
             );
           })}
@@ -29,20 +33,18 @@ export const Recents = ({data}: {data?: UserCourse[]}) => {
       <div className="flex flex-col gap-1 p-6 bg-white rounded-lg shadow-md">
         <h1 className="text-lg">Daily Progress</h1>
         {data.map((x, i) => {
-            return (
-              i < 3 && (
-                <div
-                  key={x.course.id.toString()}
-                  className="flex items-center gap-2 p-1 hover:bg-gray-200 cursor-pointer"
-                >
-                  <div className="text-lg text-black">
-                    {i + 1}
-                  </div>
-                  <h1 className="text-black text-lg">{x.course.title}</h1>
-                </div>
-              )
-            );
-          })}
+          return (
+            i < 3 && (
+              <div
+                key={x.course.id.toString()}
+                className="flex items-center gap-2 p-1 hover:bg-gray-200 cursor-pointer"
+              >
+                <div className="text-lg text-black">{i + 1}</div>
+                <h1 className="text-black text-lg">{x.course.title}</h1>
+              </div>
+            )
+          );
+        })}
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
-# ASHMAWIYA LMS
-## Tech Stack
+# ASHMAWIYA
+## LEARNING PLATFORM FOR [FAQIHNAFSAK](https://faqihnafsak.com)
+### Tech Stack
 - [Express.js](https://expressjs.com/) as backend
-- [React](https://reactjs.org/) as frontend library 
+- [React](https://reactjs.org/) as frontend library
 - [TypeScript](https://www.typescriptlang.org/) as programming language
 - [Prisma](https://prisma.io/) as database ORM
 - [PostgreSQL](https://www.postgresql.org/) as database
@@ -10,5 +11,5 @@
 - [ESLint](https://eslint.org/) as code linting tool
 - __Etc.__
 
-## Ashmawiya Courses Rights
-belong to [Fakihnafsak](https://faqihnafsak.com)
+### Ashmawiya Courses Rights
+belong to [Faqihnafsak](https://faqihnafsak.com)

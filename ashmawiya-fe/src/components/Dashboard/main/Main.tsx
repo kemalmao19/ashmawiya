@@ -4,6 +4,7 @@ import useData from "../hooks/useData";
 
 export const Main = () => {
   const { state } = useData();
+  console.log("useData", state);
 
   return (
     <div className="flex flex-col p-16 gap-9">

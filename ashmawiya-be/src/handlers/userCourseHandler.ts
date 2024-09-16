@@ -41,6 +41,25 @@ export const userCourseByUser = async (req: Request<{ id: number }>, res: Respon
     }
 }
 
+export const userCourseAdd = async (req: Request<{},{}, {userId: number, courseId: number}>, res: Response<Message>) => {
+    const { userId, courseId } = req.body;
+    if (!userId || !courseId) {
+        return res.status(400).json({ message: "User ID or Course ID is required" });
+    }
+    
+    try {
+        const userCourse = await prisma.userCourse.create({
+            data: {
+                userId: Number(userId),
+                courseId: Number(courseId),
+            }
+        })
+        res.status(201).json({message: "User Course added successfully"})
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const userCourseUpdate = async (req: Request<{ id: number }, {}, {isComplete: boolean}>, res: Response) => {
     const {id} = req.params
     const {isComplete} = req.body

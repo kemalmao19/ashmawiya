@@ -4,13 +4,14 @@ import usersRouter from "./routes/users";
 import coursesRouter from "./routes/courses";
 import usersCourseRouter from "./routes/usersCourse";
 import cors from "cors";
-// import Cookies from 'js-cookie'
 
 const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: '*',
+}));
 
 app.get("/", (req, res) => {
   res.send("Server is running...");

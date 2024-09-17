@@ -61,23 +61,39 @@ export const userCourseAdd = async (req: Request<{},{}, {userId: number, courseI
 }
 
 export const userCourseUpdate = async (req: Request<{ id: number }, {}, {isComplete: boolean}>, res: Response) => {
-    const {id} = req.params
-    const {isComplete} = req.body
-
+    const { id } = req.params;
+    const { isComplete } = req.body;
+  
     if (!id) {
-        return res.status(400).json({ message: "ID is required" });
+      return res.status(400).json({ message: "ID is required" });
     }
+  
     try {
-        const userCourse = await prisma.userCourse.update({
-            where: {
-                id: Number(id),
-            },
-            data: {
-                isComplete
-            }
-        })
-        res.status(201).json(userCourse)
+      // Check if the record exists
+      const existingUserCourse = await prisma.userCourse.findUnique({
+        where: {
+          id: Number(id),
+        },
+      });
+  
+      if (!existingUserCourse) {
+        return res.status(404).json({ message: `UserCourse with ID ${id} not found` });
+      }
+  
+      // Update the record if it exists
+      const updatedUserCourse = await prisma.userCourse.update({
+        where: {
+          id: Number(id),
+        },
+        data: {
+          isComplete,
+        },
+      });
+  
+      return res.status(200).json(updatedUserCourse);
     } catch (error) {
-        console.log(error)
+      console.error("Error updating UserCourse:", error);
+      return res.status(500).json({ message: "Internal server error" });
     }
-}
+  };
+  

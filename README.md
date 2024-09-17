@@ -1,5 +1,5 @@
 # ASHMAWIYA
-## LEARNING PLATFORM FOR [FAQIHNAFSAK](https://faqihnafsak.com)
+## LEARNING PLATFORM FOR [FAQIHNAFSAK](https://faqihnafsak.com)'s al ashmaiya lecture
 ### Tech Stack
 - [Express.js](https://expressjs.com/) as backend
 - [React](https://reactjs.org/) as frontend library

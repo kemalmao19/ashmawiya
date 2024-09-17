@@ -35,7 +35,11 @@ export const addUserCourse = (userId: number) => (courseId: number) => {
   })
   }
 
-export const updateUserCourse = (id: string) => async (data: { isComplete: boolean }) => {
+export const updateUserCourse = (id: number) => async (data: { isComplete: boolean }) => {
+  if (!id) {
+    return Promise.reject("Course ID is required");
+  }
+  console.log(`${checkEnvironment()}/usercourse/${id}`)
   return fetch(`${checkEnvironment()}/usercourse/${id}`, {
     method: "PUT",
     headers: {

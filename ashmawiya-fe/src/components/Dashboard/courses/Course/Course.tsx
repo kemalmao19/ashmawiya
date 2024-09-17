@@ -11,7 +11,9 @@ export const Course = () => {
   const [start, setStart] = useState(doesCourseExist(state, Number(id), userId));
   const [done, setDone] = useState(false);
 
-  const course = state.courses.value.find((course) => course.id === Number(id));
+  const course = state.courses.value.find((course) => course.id === Number(id)); // course data
+
+  const userCourse = state.user.value.find((course) => course.courseId === Number(id)); // user course data
 
   return (
     <div className="flex justify-center items-center my-16">
@@ -35,7 +37,7 @@ export const Course = () => {
         </div>
 
         {start ? 
-          <button className={`${done ? "bg-cyan-700 opacity-50" : "bg-cyan-500"} hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-md inline-block` } onClick={() => handleDone({ done, setDone })(id!)}>Mark as Done</button> : null
+          <button className={`${userCourse?.isComplete || done ? "bg-cyan-700 opacity-50 cursor-not-allowed" : "bg-cyan-500"} hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-md inline-block` } onClick={() => handleDone({ done, setDone })(userCourse!.id)}>{userCourse?.isComplete || done ? "Completed" : "Mark as Complete"}</button> : null
         }
       </div>
     </div>

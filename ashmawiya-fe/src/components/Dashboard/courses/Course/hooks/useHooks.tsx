@@ -1,7 +1,7 @@
 import { updateUserCourse, addUserCourse } from "../../../../../utils/fetchHandler";
 
 export const useFetch = () => {
-    const handleDone = ( state: { done: boolean , setDone: (b: boolean)=>void}) => (id: string) => {
+    const handleDone = ( state: { done: boolean , setDone: (b: boolean)=>void}) => (id: number) => {
         const { done, setDone } = state;
         setDone(!done);
       

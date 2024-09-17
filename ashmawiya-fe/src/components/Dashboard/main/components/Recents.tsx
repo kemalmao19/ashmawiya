@@ -10,22 +10,24 @@ export const Recents = ({ data }: { data?: UserCourse[] }) => {
       <div className="col-span-2">
         <h1 className="text-lg">Recent Watched Course</h1>
         <div className="grid grid-cols-2 gap-6">
-          {data.map((x, i) => {
-            return (
-              !x.isComplete ? 
-                <Link
-                  to={`/dashboard/courses/${x.course.id}`}
-                  key={x.course.id.toString()}
-                  className="flex items-center gap-6 p-6 bg-white hover:bg-cyan-300 transition-all delay-100 rounded-lg shadow-md cursor-pointer"
-                >
-                  <div className="text-xl text-black py-2 px-4 bg-gray-300 rounded-md ">
-                    {i + 1}
-                  </div>
-                  <h1 className="text-black text-lg">{x.course.title}</h1>
-                </Link>
-              : null
-            );
-          })}
+          {data.length > 0 ? 
+            data.map((x, i) => {
+              return (
+                !x.isComplete ? 
+                  <Link
+                    to={`/dashboard/courses/${x.course.id}`}
+                    key={x.course.id.toString()}
+                    className="flex items-center gap-6 p-6 bg-white hover:bg-cyan-300 transition-all delay-100 rounded-lg shadow-md cursor-pointer"
+                  >
+                    <div className="text-xl text-black py-2 px-4 bg-gray-300 rounded-md ">
+                      {i + 1}
+                    </div>
+                    <h1 className="text-black text-lg">{x.course.title}</h1>
+                  </Link>
+                : null
+              );
+            }) : <span className="loading loading-spinner loading-lg"></span>
+          }
         </div>
       </div>
       <div className="flex flex-col gap-1 p-6 bg-white rounded-lg shadow-md">

@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { StateContext } from "../../../../state/context";
-import {useFetch, doesCourseExist} from "./hooks/useHooks";
+import { useFetch, doesCourseExist } from "./hooks/useHooks";
+import { Note } from "./Note/Note";
 export const Course = () => {
   const { id } = useParams(); // course id
   const { state } = useContext(StateContext) as ContextType;
@@ -29,16 +30,18 @@ export const Course = () => {
           {!start ? (
             <button
               className="absolute inset-0 flex items-center justify-center bg-cyan-500 text-white text-2xl font-bold py-2 px-4 hover:bg-cyan-700"
-              onClick={() => handleAddCourse({start, setStart})(userId, Number(id))}
+              onClick={() => handleAddCourse({ start, setStart })(userId, Number(id))}
             >
               Start Learning
             </button>
           ) : null}
         </div>
 
-        {start ? 
-          <button className={`${userCourse?.isComplete || done ? "bg-cyan-700 opacity-50 cursor-not-allowed" : "bg-cyan-500"} hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-md inline-block` } onClick={() => handleDone({ done, setDone })(userCourse!.id)}>{userCourse?.isComplete || done ? "Completed" : "Mark as Complete"}</button> : null
+        {start ?
+          <button className={`${userCourse?.isComplete || done ? "bg-cyan-700 opacity-50 cursor-not-allowed" : "bg-cyan-500"} hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-md inline-block`} onClick={() => handleDone({ done, setDone })(userCourse!.id)}>{userCourse?.isComplete || done ? "Completed" : "Mark as Complete"}</button> : null
         }
+
+        <Note />
       </div>
     </div>
   );

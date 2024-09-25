@@ -40,3 +40,9 @@ type tagGroup = {
   siyam: Course[];
   [key: string]: Course[];
 };
+
+type Note = {
+  id?: number;
+  userId: number;
+  text: string;
+};

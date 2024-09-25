@@ -52,5 +52,14 @@ model UserCourse {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  Notes Note[]
+
   @@unique([userId, courseId]) // Ensure that each user-course pair is unique
+}
+
+model Note {
+  id Int @id @default(autoincrement())
+  userCourse UserCourse @relation(fields: [userCourseId], references: [id])
+  userCourseId Int
+  content String @db.Text
 }

@@ -1,17 +1,13 @@
 import { Link } from "react-router-dom";
 
 export const Recents = ({ data }: { data?: UserCourse[] }) => {
-  if (!data) {
-    return <div>No data</div>;
-  }
-
+   
   return (
     <div id="recents" className="grid lg:grid-cols-3 text-black gap-6">
       <div className="col-span-2">
         <h1 className="text-lg">Recent Watched Course</h1>
         <div className="grid grid-cols-2 gap-6">
-          {data.length > 0 ? 
-            data.map((x, i) => {
+          {data?.map((x, i) => {
               return (
                 !x.isComplete ? 
                   <Link
@@ -26,13 +22,13 @@ export const Recents = ({ data }: { data?: UserCourse[] }) => {
                   </Link>
                 : null
               );
-            }) : <span className="loading loading-spinner loading-lg"></span>
+            })
           }
         </div>
       </div>
       <div className="flex flex-col gap-1 p-6 bg-white rounded-lg shadow-md">
         <h1 className="text-lg">Completed Progress</h1>
-        {data.map((x, i) => {
+        {data?.map((x, i) => {
           return (
             i < 3 && x.isComplete ? <div
             key={x.course.id.toString()}

@@ -3,13 +3,16 @@ import prisma from "../config/prisma";
 import { CreateCourse } from "../dtos/Course.dto";
 import { Course, Message } from "../types/response";
 
-export const getCourses = async (req: Request, res: Response) => {
+export const getCourses = async (_: Request, res: Response) => {
   const courses = await prisma.course.findMany();
 
   res.json(courses);
 };
 
-export const getCourseById = async (req: Request<{id: number}>, res: Response<Message | Course>) => {
+export const getCourseById = async (
+  req: Request<{ id: number }>,
+  res: Response<Message | Course>,
+) => {
   const { id } = req.params;
   if (!id) {
     return res.status(400).json({ message: "ID is required" });
@@ -31,7 +34,10 @@ export const getCourseById = async (req: Request<{id: number}>, res: Response<Me
   }
 };
 
-export const createCourse = async (req: Request<{},{}, CreateCourse>, res: Response<{data: Course, message: string} | Message>) => {
+export const createCourse = async (
+  req: Request<{}, {}, CreateCourse>,
+  res: Response<{ data: Course; message: string } | Message>,
+) => {
   const { title, url, videoDuration } = req.body;
 
   if (!title || !url || !videoDuration) {

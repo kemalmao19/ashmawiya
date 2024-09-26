@@ -1,6 +1,10 @@
-import { Request, Response, Router } from "express";
-import { userCourseAll, userCourseByUser, userCourseUpdate, userCourseAdd } from "../handlers/userCourseHandler";
-import prisma from "../config/prisma";
+import { Router } from "express";
+import {
+  userCourseAll,
+  userCourseByUser,
+  userCourseUpdate,
+  userCourseAdd,
+} from "../handlers/userCourseHandler";
 
 const usersCourseRouter = Router();
 

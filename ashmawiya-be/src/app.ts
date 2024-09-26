@@ -4,7 +4,6 @@ import usersRouter from "./routes/users";
 import coursesRouter from "./routes/courses";
 import usersCourseRouter from "./routes/usersCourse";
 import cors from "cors";
-import notesRouter from "./routes/notes";
 
 const app = express();
 const port = process.env.PORT;
@@ -28,9 +27,6 @@ app.use("/api/courses", coursesRouter);
 
 // USERS COURSES ENDPOINTS
 app.use("/api/usercourse", usersCourseRouter);
-
-// Notes Endpoints
-app.use("/api/notes", notesRouter);
 
 app.listen(port, () => {
   console.log("server running on localhost:" + port);

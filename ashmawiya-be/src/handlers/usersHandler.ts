@@ -5,7 +5,7 @@ import prisma from "../config/prisma";
 import { RegisterUserDto, LoginUserDto } from "../dtos/User.dto";
 import { Message, User } from "../types/response";
 
-export const getUsers = async (req: Request, res: Response<User[]>) => {
+export const getUsers = async (_: Request, res: Response<User[]>) => {
   const users = await prisma.user.findMany({
     select: {
       id: true,
@@ -17,7 +17,10 @@ export const getUsers = async (req: Request, res: Response<User[]>) => {
   res.json(users);
 };
 
-export const getUserById = async (req: Request<{id: number}>, res: Response) => {
+export const getUserById = async (
+  req: Request<{ id: number }>,
+  res: Response,
+) => {
   const { id } = req.params;
   if (!id) {
     return res.status(400).json({ message: "ID is required" });
@@ -46,7 +49,10 @@ export const getUserById = async (req: Request<{id: number}>, res: Response) => 
   }
 };
 
-export const registerUser = async (req: Request<{}, {}, RegisterUserDto>, res: Response<Message>) => {
+export const registerUser = async (
+  req: Request<{}, {}, RegisterUserDto>,
+  res: Response<Message>,
+) => {
   const { username, email, password } = req.body;
 
   if (!email || !username || !password) {
@@ -77,7 +83,7 @@ export const registerUser = async (req: Request<{}, {}, RegisterUserDto>, res: R
     });
     // Send the user data back
     return res.status(201).json({
-      message: "User created successfully."
+      message: "User created successfully.",
     });
   } catch (error) {
     console.error("Error creating user:", error);
@@ -85,7 +91,10 @@ export const registerUser = async (req: Request<{}, {}, RegisterUserDto>, res: R
   }
 };
 
-export const loginUser = async (req: Request<{},{}, LoginUserDto>, res: Response<{data: User, message: string} | Message>) => {
+export const loginUser = async (
+  req: Request<{}, {}, LoginUserDto>,
+  res: Response<{ data: User; message: string } | Message>,
+) => {
   const { email, password } = req.body;
   try {
     if (!email || !password) {
@@ -122,7 +131,7 @@ export const loginUser = async (req: Request<{},{}, LoginUserDto>, res: Response
 
     return res.status(200).json({
       data: payload,
-      message: "Login successful"
+      message: "Login successful",
     });
   } catch (error) {
     console.error("Error creating user:", error);
@@ -130,7 +139,10 @@ export const loginUser = async (req: Request<{},{}, LoginUserDto>, res: Response
   }
 };
 
-export const updateUser = async (req: Request<{id: number}, {}, User&{password: string} >, res: Response<Message>) => {
+export const updateUser = async (
+  req: Request<{ id: number }, {}, User & { password: string }>,
+  res: Response<Message>,
+) => {
   const { id } = req.params;
   const { username, email, password } = req.body;
   if (!id) {

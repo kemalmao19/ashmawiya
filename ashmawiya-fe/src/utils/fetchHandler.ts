@@ -39,7 +39,7 @@ export const addUserCourse = (userId: number) => (courseId: number) => {
 };
 
 export const updateUserCourse =
-  (id: number) => async (data: { isComplete: boolean }) => {
+  (id: number) => async (data: Record<string, any>) => {
     if (!id) {
       return Promise.reject("Course ID is required");
     }
@@ -49,7 +49,7 @@ export const updateUserCourse =
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data), // Send the update data
+      body: JSON.stringify({ data: data }), // Send the update data
     })
       .then((response) => {
         if (!response.ok) {

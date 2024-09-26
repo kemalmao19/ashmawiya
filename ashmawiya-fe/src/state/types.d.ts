@@ -10,16 +10,14 @@ type StateAttr<T, V> = { type: T; value: V };
 
 type Usercourse = StateAttr<"UserCourse", UserCourse[]>;
 type AllCourses = StateAttr<"AllCourses", Course[]>;
-type UserNotes = StateAttr<"Notes", string[]>;
 
 type State = {
   panel: Panel;
   user: Usercourse;
   courses: AllCourses;
-  notes: UserNotes;
 };
 
-type Action = Panel | Usercourse | AllCourses | UserNotes;
+type Action = Panel | Usercourse | AllCourses;
 
 type ContextType = {
   state: State;

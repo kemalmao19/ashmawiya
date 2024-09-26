@@ -9,12 +9,16 @@ export const Course = () => {
   const { handleDone, handleAddCourse } = useFetch();
 
   const userId = JSON.parse(localStorage.getItem("user") || "{}").id; // user id
-  const [start, setStart] = useState(doesCourseExist(state, Number(id), userId));
+  const [start, setStart] = useState(
+    doesCourseExist(state, Number(id), userId)
+  );
   const [done, setDone] = useState(false);
 
   const course = state.courses.value.find((course) => course.id === Number(id)); // course data
 
-  const userCourse = state.user.value.find((course) => course.courseId === Number(id)); // user course data
+  const userCourse = state.user.value.find(
+    (course) => course.courseId === Number(id)
+  ); // user course data
 
   return (
     <div className="flex justify-center items-center my-16">
@@ -30,18 +34,29 @@ export const Course = () => {
           {!start ? (
             <button
               className="absolute inset-0 flex items-center justify-center bg-cyan-500 text-white text-2xl font-bold py-2 px-4 hover:bg-cyan-700"
-              onClick={() => handleAddCourse({ start, setStart })(userId, Number(id))}
+              onClick={() =>
+                handleAddCourse({ start, setStart })(userId, Number(id))
+              }
             >
               Start Learning
             </button>
           ) : null}
         </div>
 
-        {start ?
-          <button className={`${userCourse?.isComplete || done ? "bg-cyan-700 opacity-50 cursor-not-allowed" : "bg-cyan-500"} hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-md inline-block`} onClick={() => handleDone({ done, setDone })(userCourse!.id)}>{userCourse?.isComplete || done ? "Completed" : "Mark as Complete"}</button> : null
-        }
+        {start ? (
+          <button
+            className={`${
+              userCourse?.isComplete || done
+                ? "bg-cyan-700 opacity-50 cursor-not-allowed"
+                : "bg-cyan-500"
+            } hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-md inline-block`}
+            onClick={() => handleDone({ done, setDone })(userCourse!.id)}
+          >
+            {userCourse?.isComplete || done ? "Completed" : "Mark as Complete"}
+          </button>
+        ) : null}
 
-        <Note />
+        <Note data={userCourse!} userId={userId} />
       </div>
     </div>
   );

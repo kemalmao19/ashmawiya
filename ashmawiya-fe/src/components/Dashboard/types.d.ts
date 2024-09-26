@@ -12,6 +12,7 @@ type UserCourse = {
   id: number;
   userId: number;
   courseId: number;
+  note: string;
   watchedTime: number;
   isComplete: boolean;
   createdAt: Date;

@@ -1,20 +1,24 @@
-import { checkEnvironment } from "../config/apiUrl";
+import { urlApi } from "../config/apiUrl";
+
+const urlUserCourse = urlApi("/usercourse/user/");
+const urlUpdateUserCourse = urlApi("/usercourse/");
+const urlCourses = urlApi("/courses/");
 
 export const getUserCourse =
   (id: number) => (dispatch: (data: Usercourse) => void) => {
-    fetch(checkEnvironment() + `/usercourse/user/${id}`)
+    fetch(urlUserCourse(id))
       .then((response) => response.json())
       .then((data) => dispatch({ type: "UserCourse", value: data }));
   };
 
 export const getAllCourses = (dispatch: (data: AllCourses) => void) => {
-  fetch(checkEnvironment() + `/courses`)
+  fetch(urlCourses())
     .then((response) => response.json())
     .then((data) => dispatch({ type: "AllCourses", value: data }));
 };
 
-export const addUserCourse = (userId: number) => (courseId: number) => {
-  return fetch(checkEnvironment() + `/usercourse`, {
+export const addUserCourse = (userId: number) => async (courseId: number) => {
+  return fetch(urlUserCourse(), {
     headers: {
       "Content-Type": "application/json",
     },
@@ -43,8 +47,7 @@ export const updateUserCourse =
     if (!id) {
       return Promise.reject("Course ID is required");
     }
-    console.log(`${checkEnvironment()}/usercourse/${id}`);
-    return fetch(`${checkEnvironment()}/usercourse/${id}`, {
+    return fetch(urlUpdateUserCourse(id), {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -67,3 +70,11 @@ export const updateUserCourse =
         throw new Error("Failed to update course status. Please try again.");
       });
   };
+
+export const getNote = async (userId: number, data: UserCourse) => {
+  return fetch(urlUserCourse(userId))
+    .then((items) => items.json())
+    .then((items) =>
+      items.find((item: Record<string, any>) => item.id == data.id)
+    );
+};

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { updateUserCourse } from "../../../../../utils/fetchHandler";
+import { useFetch } from "../hooks/useHooks";
 export const Note = ({
   data,
   userId,
@@ -8,28 +8,14 @@ export const Note = ({
   userId: number;
 }) => {
   const [note, setNote] = useState<string>(data.note);
-  const handleUpdateNote = () => {
-    const update = updateUserCourse(data.id);
-    update({ note: note })
-      .then(() => {
-        console.log("Note update was successful.");
-      })
-      .catch((error) => {
-        // Revert state change if the request fails
-        alert(error.message);
-      });
+  const { getUserNote, handleUpdateNote } = useFetch();
+  const handleSubmit = () => {
+    handleUpdateNote(data.id, { note: note });
   };
   useEffect(() => {
-    fetch(`http://localhost:5000/api/usercourse/user/${userId}`)
-      .then((items) => items.json())
-      .then((items) =>
-        items.find((item: Record<string, any>) => item.id == data.id)
-      )
-      .then((item) => setNote(item.note))
-      .catch((error) => console.log(error.message));
+    getUserNote(userId, data).then((item) => setNote(item.note));
   }, [data]);
 
-  if (!data) return <div className="">No note</div>;
   return (
     <div className="">
       <h1 className="text-xl text-black">Write some note</h1>
@@ -41,7 +27,7 @@ export const Note = ({
           onChange={(e) => setNote(e.target.value)}
           className="w-full bg-white border-2"
         />
-        <button onClick={() => handleUpdateNote()}>
+        <button onClick={() => handleSubmit()}>
           {note === "" ? "add note" : "update note"}
         </button>
       </div>

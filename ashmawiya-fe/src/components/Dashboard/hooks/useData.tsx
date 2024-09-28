@@ -10,7 +10,7 @@ const useData = () => {
   useEffect(() => {
     getUserCourse(userId)(dispatch);
     getAllCourses(dispatch);
-  }, []);
+  }, [dispatch]);
 
   return {
     state,

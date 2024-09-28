@@ -34,7 +34,7 @@ createRoot(document.getElementById("root")!).render(
         <Route
           path="/register"
           element={
-            <AuthCheck>
+            <AuthCheck direction="/dashboard">
               <Register />
             </AuthCheck>
           }
@@ -42,7 +42,7 @@ createRoot(document.getElementById("root")!).render(
         <Route
           path="/login"
           element={
-            <AuthCheck>
+            <AuthCheck direction="/dashboard">
               <Login />
             </AuthCheck>
           }

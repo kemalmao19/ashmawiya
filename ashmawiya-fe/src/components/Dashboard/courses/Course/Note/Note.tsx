@@ -1,24 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFetch } from "../hooks/useHooks";
 export const Note = ({
   data,
-  userId,
 }: {
   data: UserCourse;
-  userId: number;
 }) => {
   const [note, setNote] = useState<string>(data.note);
-  const { getUserNote, handleUpdateNote } = useFetch();
+  const { handleUpdateNote } = useFetch();
   const handleSubmit = () => {
     handleUpdateNote(data.id, { note: note });
   };
-  useEffect(() => {
-    getUserNote(userId, data).then((item) => setNote(item.note));
-  }, [data]);
 
   return (
     <div className="">
-      <h1 className="text-xl text-black">Write some note</h1>
+      <h1 className="text-xl text-black">
+        {note === "" ? "Write some notes" : "Your notes"}
+      </h1>
       <div className="flex flex-col gap-2">
         <textarea
           value={note}

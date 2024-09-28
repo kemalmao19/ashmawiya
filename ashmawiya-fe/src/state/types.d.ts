@@ -1,4 +1,4 @@
-type PanelAttr<T> = { type: T };
+type PanelAttr<T> = { t: T };
 
 type Dashboard = PanelAttr<"Dashboard">;
 type Courses = PanelAttr<"Courses">;
@@ -6,7 +6,7 @@ type Resources = PanelAttr<"Resources">;
 
 type Panel = Dashboard | Courses | Resources;
 
-type StateAttr<T, V> = { type: T; value: V };
+type StateAttr<T, V> = { t: T; value: V };
 
 type Usercourse = StateAttr<"UserCourse", UserCourse[]>;
 type AllCourses = StateAttr<"AllCourses", Course[]>;

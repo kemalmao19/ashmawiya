@@ -16,7 +16,7 @@ export const Course = () => {
   const course = state.courses.value.find((course) => course.id === Number(id)); // course data
 
   const userCourse = state.user.value.find(
-    (course) => course.courseId === Number(id),
+    (course) => course.courseId === Number(id)
   ); // user course data
 
   useEffect(() => {
@@ -50,17 +50,18 @@ export const Course = () => {
 
         {start ? (
           <button
-            className={`${userCourse?.isComplete || done
+            className={`${
+              userCourse?.isComplete || done
                 ? "bg-cyan-700 opacity-50 cursor-not-allowed"
                 : "bg-cyan-500"
-              } hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-md inline-block`}
+            } hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-md inline-block`}
             onClick={() => handleDone({ done, setDone })(userCourse!.id)}
           >
             {userCourse?.isComplete || done ? "Completed" : "Mark as Complete"}
           </button>
         ) : null}
 
-        {userCourse?.note ? <Note data={userCourse!} /> : <></>}
+        {userCourse ? <Note data={userCourse!} /> : <></>}
       </div>
     </div>
   );

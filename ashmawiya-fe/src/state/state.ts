@@ -1,15 +1,15 @@
 export const initialState: State = {
-  panel: { type: "Dashboard" },
-  user: { type: "UserCourse", value: [] },
-  courses: { type: "AllCourses", value: [] },
+  panel: { t: "Dashboard" },
+  user: { t: "UserCourse", value: [] },
+  courses: { t: "AllCourses", value: [] },
 };
 
 export const reducer = (state: State, action: Action) => {
-  switch (action.type) {
+  switch (action.t) {
     case "Dashboard":
     case "Resources":
     case "Courses":
-      return setPanel(state, { type: action.type });
+      return setPanel(state, { t: action.t });
 
     case "UserCourse":
       return setUserCourse(state, { ...action, value: action.value });

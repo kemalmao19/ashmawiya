@@ -8,13 +8,13 @@ export const getUserCourse =
   (id: number) => (dispatch: (data: Usercourse) => void) => {
     fetch(urlUserCourse(id))
       .then((response) => response.json())
-      .then((data) => dispatch({ type: "UserCourse", value: data }));
+      .then((data) => dispatch({ t: "UserCourse", value: data }));
   };
 
 export const getAllCourses = (dispatch: (data: AllCourses) => void) => {
   fetch(urlCourses())
     .then((response) => response.json())
-    .then((data) => dispatch({ type: "AllCourses", value: data }));
+    .then((data) => dispatch({ t: "AllCourses", value: data }));
 };
 
 export const addUserCourse = (userId: number) => async (courseId: number) => {
@@ -75,6 +75,6 @@ export const getNote = async (userId: number, data: UserCourse) => {
   return fetch(urlUserCourse(userId))
     .then((items) => items.json())
     .then((items) =>
-      items.find((item: Record<string, any>) => item.id == data.id),
+      items.find((item: Record<string, any>) => item.id == data.id)
     );
 };

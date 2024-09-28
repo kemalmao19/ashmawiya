@@ -6,7 +6,7 @@ import { Course, Message } from "../types/response";
 export const getCourses = async (_: Request, res: Response) => {
   const courses = await prisma.course.findMany();
 
-  res.json(courses);
+  res.status(200).json(courses);
 };
 
 export const getCourseById = async (

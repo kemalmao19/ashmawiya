@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { StateContext } from "../../../../state/context";
 import { useFetch, doesCourseExist } from "./hooks/useHooks";
@@ -9,9 +9,8 @@ export const Course = () => {
   const { handleDone, handleAddCourse } = useFetch();
 
   const userId = JSON.parse(localStorage.getItem("user") || "{}").id; // user id
-  const [start, setStart] = useState(
-    doesCourseExist(state, Number(id), userId),
-  );
+  const [start, setStart] = useState(false);
+
   const [done, setDone] = useState(false);
 
   const course = state.courses.value.find((course) => course.id === Number(id)); // course data
@@ -20,7 +19,9 @@ export const Course = () => {
     (course) => course.courseId === Number(id),
   ); // user course data
 
-  console.log(userCourse);
+  useEffect(() => {
+    setStart(doesCourseExist(state, Number(id), userId));
+  }, [state, id, userId]);
 
   return (
     <div className="flex justify-center items-center my-16">
@@ -57,7 +58,7 @@ export const Course = () => {
           </button>
         ) : null}
 
-        {userCourse?.note ? <Note data={userCourse!} /> : <>no notes</>}
+        {userCourse?.note ? <Note data={userCourse!} /> : <></>}
       </div>
     </div>
   );

@@ -23,6 +23,8 @@ export const Course = () => {
     setStart(doesCourseExist(state, Number(id), userId));
   }, [state, id, userId]);
 
+  console.log(userCourse);
+
   return (
     <div className="flex justify-center items-center my-16">
       <div className="flex flex-col gap-4">

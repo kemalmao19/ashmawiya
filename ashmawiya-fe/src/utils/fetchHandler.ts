@@ -18,7 +18,7 @@ export const getAllCourses = (dispatch: (data: AllCourses) => void) => {
 };
 
 export const addUserCourse = (userId: number) => async (courseId: number) => {
-  return fetch(urlUserCourse(), {
+  return fetch(urlUpdateUserCourse(), {
     headers: {
       "Content-Type": "application/json",
     },
@@ -75,6 +75,6 @@ export const getNote = async (userId: number, data: UserCourse) => {
   return fetch(urlUserCourse(userId))
     .then((items) => items.json())
     .then((items) =>
-      items.find((item: Record<string, any>) => item.id == data.id)
+      items.find((item: Record<string, any>) => item.id == data.id),
     );
 };

@@ -12,7 +12,13 @@ export const Progress = ({ data }: { data?: UserCourse[] }) => {
     0,
   );
 
-  const progress = [
+  type progressType = {
+    title: string;
+    icon: JSX.Element;
+    number: number | string;
+  };
+
+  const progress: progressType[] = [
     {
       title: "Total Watched",
       icon: <Eye />,
@@ -21,7 +27,7 @@ export const Progress = ({ data }: { data?: UserCourse[] }) => {
     {
       title: "Completed",
       icon: <CircleCheckBig />,
-      number: totalCompleted,
+      number: totalCompleted!,
     },
     {
       title: "Quiz Score",
@@ -37,7 +43,8 @@ export const Progress = ({ data }: { data?: UserCourse[] }) => {
       </div>
       <div id="progress" className="grid grid-cols-3 gap-6">
         {progress.map((progres, i) => {
-          const progress = (progres.number / 14) * 100;
+          const progressNum =
+            progres.title === "Completed" ? (progres.number / 14) * 100 : 0;
           return (
             <div
               key={i.toString()}
@@ -53,7 +60,7 @@ export const Progress = ({ data }: { data?: UserCourse[] }) => {
                 {progres.title === "Completed" ? (
                   <progress
                     className="progress progress-info w-full"
-                    value={progress}
+                    value={progressNum}
                     max="100"
                   ></progress>
                 ) : (

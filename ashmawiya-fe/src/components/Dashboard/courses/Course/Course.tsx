@@ -29,7 +29,7 @@ export const Course = () => {
     <div className="flex justify-center items-center py-16 bg-base-100">
       <div className="flex flex-col gap-4">
         <h1 className="text-xl text-black">{course?.title.toUpperCase()}</h1>
-        <div className="relative w-[720px] h-[405px]">
+        <div className="relative lg:w-[720px] lg:h-[420px]">
           <iframe
             className="absolute inset-0 w-full h-full"
             src={`${course?.url}?autoplay=1&mute=0`}

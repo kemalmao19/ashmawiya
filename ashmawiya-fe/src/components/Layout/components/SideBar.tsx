@@ -13,7 +13,7 @@ export const SideBar = ({
     >
       <div id="logo" className="text-lg font-bold flex gap-2 items-center">
         <NotebookText />
-        {isHover ? <h1>ASHMAWIYA</h1> : null}
+        {isHover ? <div>ASHMAWIYA</div> : null}
       </div>
       <Links isHover={isHover} />
       <label

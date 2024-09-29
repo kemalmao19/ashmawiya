@@ -36,7 +36,7 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
     <div className="w-full pl-14">
       <div className="navbar bg-base-100 p-6 shadow-md">
         <div className="flex-1">
-          <h1 className="font-bold text-base-content">ASHMAWIYA</h1>
+          <div className="font-bold text-base-content">ASHMAWIYA</div>
         </div>
         <div className="flex-none gap-2">
           <div className="dropdown dropdown-end">

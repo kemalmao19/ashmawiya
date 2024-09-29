@@ -31,12 +31,13 @@ export const Progress = ({ data }: { data?: UserCourse[] }) => {
   ];
   return (
     <div id="section1" className="flex flex-col space-y-6">
-      <div id="head" className="text-black">
+      <div id="head" className="text-base-content">
         <h1 className="text-lg">{`Welcome back ${username}!`}</h1>
         <p className="text-sm">Here overview of your course</p>
       </div>
       <div id="progress" className="grid grid-cols-3 gap-6">
         {progress.map((progres, i) => {
+          const progress = (progres.number / 14) * 100;
           return (
             <div
               key={i.toString()}
@@ -48,7 +49,18 @@ export const Progress = ({ data }: { data?: UserCourse[] }) => {
                   {progres.icon}
                 </div>
               </div>
-              <p className="text-sm">{progres.number}</p>
+              <div className="flex items-center gap-2">
+                {progres.title === "Completed" ? (
+                  <progress
+                    className="progress progress-info w-full"
+                    value={progress}
+                    max="100"
+                  ></progress>
+                ) : (
+                  <></>
+                )}
+                <p className="text-sm">{progres.number}</p>
+              </div>
             </div>
           );
         })}

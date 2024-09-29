@@ -7,7 +7,7 @@ export const Main = () => {
   const { state } = React.useContext(StateContext) as ContextType;
 
   return (
-    <div className="flex flex-col p-16 gap-9">
+    <div className="flex flex-col p-16 gap-9 bg-base-100">
       <Progress data={state.user.value} />
       <Recents data={state.user.value} />
       <div id="upcoming">upcoming</div>

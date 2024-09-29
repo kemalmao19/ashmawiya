@@ -7,4 +7,9 @@ export default {
     },
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["night", "retro"],
+    darkTheme: "night",
+    themeRoot: ":Root",
+  },
 };

@@ -37,10 +37,7 @@ export const Links = ({ isHover }: { isHover: boolean }) => {
           to={menu.link}
           id="menu"
           key={menu.name}
-          className="flex items-center gap-3 cursor-pointer hover:text-black transition-all ease-out delay-100"
-          style={{
-            color: menu.name === state.panel.t ? "black" : "",
-          }}
+          className={`flex items-center gap-3 cursor-pointer ${menu.name === state.panel.t ? "text-accent" : ""} hover:text-accent transition-all ease-out delay-100`}
           onClick={() => dispatch({ t: menu.name } as Panel)}
         >
           {menu.icon}

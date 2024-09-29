@@ -21,7 +21,7 @@ export const Cards = () => {
       {Object.keys(group).map((tag: string, i: number) => {
         return (
           <div key={i.toString()} className="space-y-4">
-            <div className="text-xl font-bold border-b-2 p-1">
+            <div className="text-xl font-bold border-b-2 border-accent p-1 text-base-content">
               {tag.toUpperCase()}
             </div>
             <div className="grid grid-cols-3 gap-6">
@@ -29,7 +29,7 @@ export const Cards = () => {
                 <Link
                   to={`/dashboard/courses/${item.id}`}
                   key={index.toString()}
-                  className="flex items-center gap-6 p-6 bg-white hover:bg-cyan-300 transition-all delay-100 rounded-lg shadow-md"
+                  className="flex items-center gap-6 p-6 bg-white hover:bg-accent transition-all delay-100 rounded-lg shadow-md"
                 >
                   <div className="text-xl py-2 px-4 bg-gray-300 rounded-md ">
                     {item.id}

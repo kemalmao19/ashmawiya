@@ -27,7 +27,7 @@ export const Progress = ({ data }: { data?: UserCourse[] }) => {
     {
       title: "Completed",
       icon: <CircleCheckBig />,
-      number: totalCompleted!,
+      number: totalCompleted as number,
     },
     {
       title: "Quiz Score",
@@ -43,8 +43,7 @@ export const Progress = ({ data }: { data?: UserCourse[] }) => {
       </div>
       <div id="progress" className="grid grid-cols-3 gap-6">
         {progress.map((progres, i) => {
-          const progressNum =
-            progres.title === "Completed" ? (progres.number / 14) * 100 : 0;
+          const progressNum = ((progres.number as number) / 14) * 100;
           return (
             <div
               key={i.toString()}

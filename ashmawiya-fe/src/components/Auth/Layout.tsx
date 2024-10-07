@@ -6,7 +6,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           {children}
         </div>
       </div>
-      <div>image</div>
+      <img src="./landing-bg.jpg" alt="hero" />
     </div>
   );
 };

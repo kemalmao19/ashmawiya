@@ -1,12 +1,14 @@
-import "./App.css";
+import "./Landing.css";
 
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Link } from "react-router-dom";
+import { Footer } from "./Footer";
+import { ChartLine, NotebookPen, Zap } from "lucide-react";
 
-function App() {
+function Landing() {
 	gsap.registerPlugin(ScrollTrigger);
 	const preloaderBackground = useRef<HTMLDivElement>(null);
 	const preloaderText = useRef<HTMLDivElement>(null);
@@ -115,7 +117,7 @@ function App() {
 			scrollTrigger: {
 				trigger: aboutTrigger.current,
 				start: "top bottom",
-				end: "bottom top",
+				end: "bottom 60%",
 				scrub: true,
 			},
 			defaults: { ease: "power3.inOut", duration: 2 },
@@ -137,6 +139,27 @@ function App() {
 		return tl;
 	};
 
+	const animateFeature = () => {
+		const tl = gsap.timeline();
+		const featureItems = document.querySelectorAll(".feature-item");
+
+		featureItems.forEach((item) => {
+			tl.from(item, {
+				y: 50,
+				autoAlpha: 0,
+				duration: 1,
+				ease: "power3.out",
+				scrollTrigger: {
+					trigger: item,
+					start: "top bottom",
+					end: "bottom top",
+					toggleActions: "play none none reverse",
+				},
+			});
+		});
+		return tl;
+	};
+
 	useEffect(() => {
 		document.body.classList.add("no-scroll"); // Add no-scroll class on mount
 		return () => {
@@ -154,14 +177,15 @@ function App() {
 						document.body.classList.remove("no-scroll");
 					})
 					.add(heroImageAnimation())
-					.add(aboutAnimation()!);
+					.add(aboutAnimation()!)
+					.add(animateFeature());
 			}
 		},
 		{ scope: preloaderText },
 	);
 
 	const about =
-		"This platform provides a streamlined and accessible way to learn the Maliki school of Islamic jurisprudence.By leveraging the comprehensive video resources from Faqihnafsak.com, you can gain a deeper understanding of Fiqh Maliki concepts at your own pace.We help you track your progress and stay motivated as you embark on this enriching learning experience.";
+		"This platform provides a streamlined and accessible way to learn the Maliki school of Islamic jurisprudence. By leveraging the comprehensive video resources from Faqihnafsak.com, you can gain a deeper understanding of Fiqh Maliki concepts at your own pace. We help you track your progress and stay motivated as you embark on this enriching learning experience.";
 
 	return (
 		<>
@@ -185,7 +209,7 @@ function App() {
 					</div>
 					<div id="hero__content">
 						<p id="hero__caption">
-							<span ref={heroCaption}>More details. More fun.</span>
+							<span ref={heroCaption}>Just Focus Learning</span>
 						</p>
 						<h1 id="hero__title">
 							<span>
@@ -210,8 +234,57 @@ function App() {
 					))}
 				</p>{" "}
 			</div>
+			<div id="features">
+				<h2>Features</h2>
+				<div className="feature-wrapper">
+					<div className="feature-item" id="tracker">
+						<ChartLine />
+						<h3>Tracker</h3>
+						<p>
+							Track your progress as you learn and stay motivated with detailed
+							analytics.
+						</p>
+					</div>
+					<div className="feature-item" id="notes">
+						<NotebookPen />
+						<h3>Notes</h3>
+						<p>
+							Take notes directly within the platform to reinforce your
+							learning.
+						</p>
+					</div>
+					<div className="feature-item" id="speed">
+						<Zap />
+						<h3>Fast</h3>
+						<p>
+							Experience seamless and fast interactions with our optimized
+							platform.
+						</p>
+					</div>
+				</div>
+			</div>{" "}
+			<div id="credits">
+				<h2>Special Thanks</h2>
+				<img
+					src="./faqih-nafsak.png"
+					alt="Faqihnafsak Logo"
+					id="credits-logo"
+				/>
+				<p>
+					We would like to extend our heartfelt thanks to
+					<a href="https://faqihnafsak.com" target="_blank">
+						{" "}
+						Faqihnafsak.com{" "}
+					</a>
+					for their incredible efforts in creating and providing the courses.
+					All course content on our platform is sourced and belongs to their
+					comprehensive video library, and we are grateful for their commitment
+					to spreading knowledge about Fiqh Maliki.
+				</p>
+			</div>
+			<Footer />
 		</>
 	);
 }
 
-export default App;
+export default Landing;
